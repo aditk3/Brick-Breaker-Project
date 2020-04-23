@@ -3,7 +3,10 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
+#include <cinder/gl/gl.h>
 
+using namespace ci::app;
+using namespace ci;
 
 namespace myapp {
 
@@ -11,11 +14,15 @@ using cinder::app::KeyEvent;
 
 MyApp::MyApp() { }
 
-void MyApp::setup() { }
+void MyApp::setup() {
+
+}
 
 void MyApp::update() { }
 
-void MyApp::draw() { }
+void MyApp::draw() {
+
+}
 
 void MyApp::keyDown(KeyEvent event) { }
 
