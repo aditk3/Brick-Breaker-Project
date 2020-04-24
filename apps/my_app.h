@@ -6,6 +6,8 @@
 #include <cinder/app/App.h>
 #include <cinder/gl/Texture.h>
 
+#include "SoundPlayer.h"
+#include "ciAnimatedGif.h"
 
 namespace myapp {
 
@@ -17,8 +19,9 @@ class MyApp : public cinder::app::App {
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
 
-private:
-
+ private:
+  rph::SoundPlayerRef sound_track_;
+  ciAnimatedGifRef gif_;
 };
 
 }  // namespace myapp

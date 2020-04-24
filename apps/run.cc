@@ -17,7 +17,7 @@ const int kHeight = 800;
 
 void SetUp(App::Settings* settings) {
   settings->setWindowSize(kWidth, kHeight);
-  settings->setFrameRate( 144.0f );
+  settings->setFrameRate(60.0f);
   settings->setTitle("My CS 126 Application");
 }
 

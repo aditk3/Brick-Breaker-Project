@@ -32,4 +32,7 @@ case studies.
 #### **04-22-40**
 - Tried getting into the Queue for over 13 hours, but was not able to speak to a CA.
 - Got a response from my Code Mod saying that I can change my project (Now need to catch up)
-- [ ] Need to write a new project proposal
+- [ ] Need to find new project
+
+#### **04-23-40**
+- Added new CinderBlocks and tested them

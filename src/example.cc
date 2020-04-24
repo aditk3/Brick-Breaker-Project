@@ -2,6 +2,4 @@
 
 #include <mylibrary/example.h>
 
-namespace mylibrary {
-
-}  // namespace mylibrary
+namespace brickbreaker {}  // namespace brickbreaker

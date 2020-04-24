@@ -2,10 +2,7 @@
 #ifndef FINALPROJECT_MYLIBRARY_EXAMPLE_H_
 #define FINALPROJECT_MYLIBRARY_EXAMPLE_H_
 
-
-namespace mylibrary {
-
-}  // namespace mylibrary
+namespace brickbreaker {}  // namespace mylibrary
 
 
 #endif // FINALPROJECT_MYLIBRARY_EXAMPLE_H_
