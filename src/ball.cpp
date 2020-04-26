@@ -9,7 +9,9 @@
 using namespace ci;
 
 namespace brickbreaker{
-    Ball::Ball() : location_(400, 300) {};
+    Ball::Ball() : location_(400, 555), velocity_(speed_, -speed_) {};
+
+    void Ball::MoveBall() { location_ = location_ + velocity_; }
 
     void Ball::DrawBall() {
         gl::color(color_);

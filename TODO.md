@@ -7,3 +7,4 @@
 -[x] Control Paddle
 -[x] Ball Class 
 -[x] Display Ball
+-[x] Move Ball (Randomly)

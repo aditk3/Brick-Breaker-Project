@@ -33,7 +33,9 @@ namespace myapp {
         SetUpGif();
     }
 
-    void MyApp::update() {}
+    void MyApp::update() {
+        engine_.MoveBall();
+    }
 
     void MyApp::draw() {
         //  gl::clear(Color(0.5, 0.5, 0.5));

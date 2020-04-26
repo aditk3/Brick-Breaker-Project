@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace brickbreaker {
-    Engine::Engine() {
-
+    Engine::Engine() : left_(-5, 0), right_(5, 0) {
+// Member initializer lists
     }
 }  // namespace brickbreaker

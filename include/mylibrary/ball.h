@@ -19,10 +19,11 @@ namespace brickbreaker {
         public:
             Ball();
             void DrawBall();
+            void MoveBall();
         private:
-            size_t radius_{10};
+            size_t radius_{10}, speed_{3};
             Color color_ = Color::white();
-            Location location_;
+            Location location_, velocity_;
         };
 }
 
