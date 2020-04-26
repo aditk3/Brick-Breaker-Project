@@ -6,15 +6,17 @@
 #include <mylibrary/player.h>
 
 namespace brickbreaker {
-class Engine {
-  Paddle paddle_;
-  size_t width_{600}, height_{600}, score_{}, lives_{3};
+    class Engine {
+        Paddle paddle_;
+        size_t width_{600}, height_{600}, score_{}, lives_{3};
 
- public:
-  //    Engine() {}
-  size_t Score() { return score_; }
-  size_t Lives() { return lives_; }
-};
+    public:
+        void DrawPaddle() {paddle_.DrawPaddle();}
+        //    Engine() {}
+        size_t Score() { return score_; }
+
+        size_t Lives() { return lives_; }
+    };
 }  // namespace brickbreaker
 
 #endif  // FINALPROJECT_MYLIBRARY_EXAMPLE_H_
