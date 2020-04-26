@@ -5,40 +5,115 @@
 #include <cinder/app/App.h>
 #include <cinder/gl/gl.h>
 
+#include <iostream>
+#include <string>
+
 #include "SoundPlayer.h"
 
 using namespace ci::app;
 using namespace ci;
 
+const char kNormalFont[] = "Arial";
+const char kBoldFont[] = "Arial Bold";
+const char kDifferentFont[] = "Papyrus";
+
 namespace myapp {
 
 using cinder::app::KeyEvent;
 
-MyApp::MyApp() { }
+static void DrawBorder();
+void DrawScore();
+
+MyApp::MyApp() {}
 
 void MyApp::setup() {
+  SetUpMusic();
+  SetUpGif();
+}
+
+void MyApp::update() {}
+
+void MyApp::draw() {
+  //  gl::clear(Color(0.5, 0.5, 0.5));
+  //  float gray = sin(getElapsedSeconds()) * 0.5f + 0.5f;
+  //  gl::color(Color(gray, gray, gray));
+  //  gl::drawSolidCircle(getWindowCenter(), 200);
+  //  gl::color(Color(1, 1, 1));
+  //
+  //  gl::translate(140, 100);
+  //  gif_->draw();
+  //  gl::translate(-140, -100);
+
+  gl::clear(Color::black());
+  DrawBorder();
+  DrawScoreBoard();
+}
+
+/**
+ * Prints text
+ * @param text std::string - String to print
+ * @param color ci::Color - Color of text
+ * @param size ivec2 - Size of text
+ * @param loc vec2 - Location to print at
+ */
+template <typename C>
+void PrintText(const std::string& text, const C& color,
+               const cinder::ivec2& size, const cinder::vec2& loc) {
+  cinder::gl::color(color);
+
+  auto box = TextBox()
+                 .alignment(TextBox::CENTER)
+                 .font(cinder::Font(kNormalFont, 30))
+                 .size(size)
+                 .color(color)
+                 .backgroundColor(ColorA(0, 0, 0, 0))
+                 .text(text);
+
+  const auto box_size = box.getSize();
+  const cinder::vec2 locp = {loc.x - box_size.x / 2, loc.y - box_size.y / 2};
+  const auto surface = box.render();
+  const auto texture = cinder::gl::Texture::create(surface);
+  cinder::gl::draw(texture, locp);
+}
+
+void MyApp::keyDown(KeyEvent event) {}
+
+/**
+ * Draws game right-edge border
+ */
+static void DrawBorder() {
+  gl::color(Color::white());
+  gl::drawSolidRect(Rectf(600, 0, 602, 600));
+}
+
+/**
+ * Prints out the current score and number of lives left
+ */
+void MyApp::DrawScoreBoard() {
+  const cinder::vec2 loc_score(700, 130);
+  const cinder::ivec2 size = {500, 50};
+  const Color color = Color::white();
+  std::string to_print = "Score: " + std::to_string(engine_.Score());
+  PrintText(to_print, color, size, loc_score);
+
+  const cinder::vec2 loc_lives(700, 600 - 130);
+  to_print = "Lives Left: " + std::to_string(engine_.Lives());
+  PrintText(to_print, color, size, loc_lives);
+}
+
+/**
+ * Starts background music (looped)
+ */
+void MyApp::SetUpMusic() {
   sound_track_ = rph::SoundPlayer::create(loadAsset("temp.mp3"));
   sound_track_->setLoop(true);
   sound_track_->setVolume(1.0);
-  sound_track_->start();
-
-  gif_ = ciAnimatedGif::create(loadAsset("temp.gif"));
+  //  sound_track_->start();
 }
 
-void MyApp::update() { }
-
-void MyApp::draw() {
-  gl::clear(Color(0.5, 0.5, 0.5));
-  float gray = sin(getElapsedSeconds()) * 0.5f + 0.5f;
-  gl::color(Color(gray, gray, gray));
-  gl::drawSolidCircle(getWindowCenter(), 200);
-  gl::color(Color(1, 1, 1));
-
-  gl::translate(140, 100);
-  gif_->draw();
-  gl::translate(-140, -100);
-}
-
-void MyApp::keyDown(KeyEvent event) { }
+/**
+ * Initializes GIF
+ */
+void MyApp::SetUpGif() { gif_ = ciAnimatedGif::create(loadAsset("temp.gif")); }
 
 }  // namespace myapp

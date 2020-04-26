@@ -5,6 +5,8 @@
 
 #include <cinder/app/App.h>
 #include <cinder/gl/Texture.h>
+#include <mylibrary/engine.h>
+#include <mylibrary/player.h>
 
 #include "SoundPlayer.h"
 #include "ciAnimatedGif.h"
@@ -20,6 +22,10 @@ class MyApp : public cinder::app::App {
   void keyDown(cinder::app::KeyEvent) override;
 
  private:
+  void SetUpMusic();
+  void DrawScoreBoard();
+  void SetUpGif();
+  brickbreaker::Engine engine_;
   rph::SoundPlayerRef sound_track_;
   ciAnimatedGifRef gif_;
 };
