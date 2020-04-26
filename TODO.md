@@ -4,6 +4,6 @@
 -[x] Display Score 
 -[x] Paddle Class 
 -[x] Display Paddle
--[ ] Control Paddle
--[ ] Ball Class 
--[ ] Display Ball
+-[x] Control Paddle
+-[x] Ball Class 
+-[x] Display Ball

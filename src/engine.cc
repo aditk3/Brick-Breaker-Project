@@ -4,4 +4,8 @@
 
 #include <iostream>
 
-namespace brickbreaker {}  // namespace brickbreaker
+namespace brickbreaker {
+    Engine::Engine() {
+
+    }
+}  // namespace brickbreaker

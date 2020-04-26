@@ -6,6 +6,7 @@
 #include <cinder/gl/gl.h>
 
 #include <mylibrary/location.h>
+#include <mylibrary/direction.h>
 
 #include <iostream>
 #include <string>
@@ -24,8 +25,6 @@ namespace myapp {
     using cinder::app::KeyEvent;
 
     static void DrawBorder();
-
-    void DrawScore();
 
     MyApp::MyApp() : player_("adit", 100) {}
 
@@ -51,6 +50,7 @@ namespace myapp {
         DrawBorder();
         DrawScoreBoard();
         engine_.DrawPaddle();
+        engine_.DrawBall();
     }
 
 /**
@@ -80,7 +80,44 @@ namespace myapp {
         cinder::gl::draw(texture, locp);
     }
 
-    void MyApp::keyDown(KeyEvent event) {}
+    void MyApp::keyDown(KeyEvent event) {
+        switch (event.getCode()) {
+//            case KeyEvent::KEY_UP:
+//            case KeyEvent::KEY_w: {
+//                engine_.SetDirection(Direction::kLeft);
+//                break;
+//            }
+//            case KeyEvent::KEY_DOWN:
+//            case KeyEvent::KEY_s: {
+//                engine_.SetDirection(Direction::kRight);
+//                break;
+//            }
+            case KeyEvent::KEY_LEFT:
+            case KeyEvent::KEY_a: {
+                engine_.MovePaddle(brickbreaker::Direction::kLeft);
+                break;
+            }
+            case KeyEvent::KEY_RIGHT:
+            case KeyEvent::KEY_d: {
+                engine_.MovePaddle(brickbreaker::Direction::kRight);
+                break;
+            }
+            case KeyEvent::KEY_p: {
+//                paused_ = !paused_;
+//
+//                if (paused_) {
+//                    last_pause_time_ = system_clock::now();
+//                } else {
+//                    last_intact_time_ += system_clock::now() - last_pause_time_;
+//                }
+                break;
+            }
+            case KeyEvent::KEY_r: {
+//                ResetGame();
+                break;
+            }
+        }
+    }
 
 /**
  * Draws game right-edge border

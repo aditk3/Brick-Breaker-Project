@@ -7,22 +7,31 @@
 
 #include <cinder/app/App.h>
 #include <cinder/gl/gl.h>
+#include <mylibrary/direction.h>
 #include <mylibrary/location.h>
 
 using namespace ci;
 using namespace ci::app;
 
 namespace brickbreaker {
-class Paddle {
-  int width_{100}, height_{15};
-  Color color_ = Color::white();
-  Location location_;
+    class Paddle {
+        size_t speed_{8};
+        int width_{100}, height_{15};
+//        Color color_ = Color::white();
+        Color color_ = Color(128, 0, 128);
+        Location location_;
 
- public:
-    Paddle();
-  int Width();
-  void DrawPaddle();
-};
+    public:
+        Paddle();
+
+        int Width();
+
+        void MovePaddle(Direction dir);
+
+        void DrawPaddle();
+
+        Location GetLocation() { return location_;}
+    };
 }  // namespace brickbreaker
 
 #endif  // FINALPROJECT_PADDLE_H
