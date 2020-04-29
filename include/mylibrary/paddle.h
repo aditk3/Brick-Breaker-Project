@@ -19,12 +19,13 @@ namespace brickbreaker {
         int width_{100}, height_{15};
 //        Color color_ = Color::white();
         Color color_ = Color(128, 0, 128);
+        cinder::gl::Texture2dRef paddle_texture_;
         Location location_;
 
     public:
         Paddle();
 
-        int Width();
+        int Width() { return width_; }
 
         void MovePaddle(Direction dir);
 

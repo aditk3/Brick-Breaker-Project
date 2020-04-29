@@ -12,26 +12,31 @@
 using namespace ci;
 using namespace ci::app;
 namespace brickbreaker {
-    int Paddle::Width() { return width_; }
 
-    Paddle::Paddle() : location_((800 / 2) - (width_ / 2), 600 - 35) {}
+    Paddle::Paddle() : location_((800 / 2) - (width_ / 2), 600 - 35) {
+        ci::gl::enableDepthRead();
+        auto img = loadImage(loadAsset("paddle_short.png"));
+        paddle_texture_ = gl::Texture2d::create(img);
+    }
 
     void Paddle::DrawPaddle() {
-        gl::color(color_);
+        gl::color(Color(1, 1, 1));
         gl::pushMatrices();
         gl::translate(location_.X(), location_.Y());
-        gl::drawSolidRect(Rectf(0, 0, width_, height_));
+        gl::draw(paddle_texture_, Rectf(0, 0, width_, height_));
         gl::popMatrices();
     }
 
     void Paddle::MovePaddle(Direction dir) {
         switch (dir) {
             case Direction::kRight: {
-                this->location_ = location_ + Location(speed_, 0);
+                if (this->location_.X() + width_ <= 800)
+                    this->location_ = location_ + Location(speed_, 0);
                 break;
             }
             case Direction::kLeft: {
-                this->location_ = location_ + Location(-1 * speed_, 0);
+                if (this->location_.X() >= 0)
+                    this->location_ = location_ + Location(-1 * speed_, 0);
                 break;
             }
             default:

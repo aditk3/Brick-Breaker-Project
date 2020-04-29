@@ -25,35 +25,7 @@ namespace myapp {
     using cinder::app::KeyEvent;
 
     static void DrawBorder();
-
-    MyApp::MyApp() : player_("adit", 100) {}
-
-    void MyApp::setup() {
-        SetUpMusic();
-        SetUpGif();
-    }
-
-    void MyApp::update() {
-        engine_.MoveBall();
-    }
-
-    void MyApp::draw() {
-        //  gl::clear(Color(0.5, 0.5, 0.5));
-        //  float gray = sin(getElapsedSeconds()) * 0.5f + 0.5f;
-        //  gl::color(Color(gray, gray, gray));
-        //  gl::drawSolidCircle(getWindowCenter(), 200);
-        //  gl::color(Color(1, 1, 1));
-        //
-        //  gl::translate(140, 100);
-        //  gif_->draw();
-        //  gl::translate(-140, -100);
-
-        gl::clear(Color::black());
-        DrawBorder();
-        DrawScoreBoard();
-        engine_.DrawPaddle();
-        engine_.DrawBall();
-    }
+    static void DrawStartGame();
 
 /**
  * Prints text
@@ -82,8 +54,38 @@ namespace myapp {
         cinder::gl::draw(texture, locp);
     }
 
+    MyApp::MyApp() : player_("adit", 100) {}
+
+    void MyApp::setup() {
+        SetUpMusic();
+        SetUpGif();
+    }
+
+    void MyApp::update() {
+        if (engine_.IsInGame()) {
+            engine_.Bounces();
+            engine_.MoveBall();
+        }
+    }
+
+    void MyApp::draw() {
+        gl::clear(Color::black());
+        DrawBorder();
+        if (!engine_.IsInGame()) {
+            DrawStartGame();
+        }
+        DrawScoreBoard();
+        engine_.DrawBrick();
+        engine_.DrawPaddle();
+        engine_.DrawBall();
+    }
+
     void MyApp::keyDown(KeyEvent event) {
         switch (event.getCode()) {
+            case KeyEvent::KEY_RETURN: {
+                engine_.SetGameState(true);
+                break;
+            }
 //            case KeyEvent::KEY_UP:
 //            case KeyEvent::KEY_w: {
 //                engine_.SetDirection(Direction::kLeft);
@@ -104,6 +106,13 @@ namespace myapp {
                 engine_.MovePaddle(brickbreaker::Direction::kRight);
                 break;
             }
+            case KeyEvent::KEY_m: {
+                if (volume_ == 0)
+                    volume_ = 1.0f;
+                else
+                    volume_ = 0.0f;
+                sound_track_->setVolume(volume_);
+            }
             case KeyEvent::KEY_p: {
 //                paused_ = !paused_;
 //
@@ -112,10 +121,6 @@ namespace myapp {
 //                } else {
 //                    last_intact_time_ += system_clock::now() - last_pause_time_;
 //                }
-                break;
-            }
-            case KeyEvent::KEY_r: {
-//                ResetGame();
                 break;
             }
         }
@@ -130,11 +135,22 @@ namespace myapp {
     }
 
 /**
+ * Draws start game
+ */
+    static void DrawStartGame() {
+        const cinder::vec2 loc_score(400, 225);
+        const cinder::ivec2 size = {500, 50};
+        const Color color = Color::white();
+        std::string to_print = "Press the 'Enter Key' to begin";
+        PrintText(to_print, color, size, loc_score);
+    }
+
+/**
  * Prints out the current score and number of lives left
  */
     void MyApp::DrawScoreBoard() {
         const cinder::vec2 loc_score(900, 130);
-        const cinder::ivec2 size = {500, 50};
+        const cinder::ivec2 size = {200, 50};
         const Color color = Color::white();
         std::string to_print = "Score: " + std::to_string(engine_.Score());
         PrintText(to_print, color, size, loc_score);
@@ -150,8 +166,8 @@ namespace myapp {
     void MyApp::SetUpMusic() {
         sound_track_ = rph::SoundPlayer::create(loadAsset("temp.mp3"));
         sound_track_->setLoop(true);
-        sound_track_->setVolume(1.0);
-        //  sound_track_->start();
+        sound_track_->setVolume(volume_);
+          sound_track_->start();
     }
 
 /**

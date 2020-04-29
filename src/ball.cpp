@@ -9,7 +9,7 @@
 using namespace ci;
 
 namespace brickbreaker{
-    Ball::Ball() : location_(400, 555), velocity_(speed_, -speed_) {};
+    Ball::Ball() : location_(400, 555), velocity_(speed_, -(speed_ - 2)) {};
 
     void Ball::MoveBall() { location_ = location_ + velocity_; }
 

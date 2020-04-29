@@ -36,6 +36,7 @@ namespace myapp {
         brickbreaker::Player player_;
         rph::SoundPlayerRef sound_track_;
         ciAnimatedGifRef gif_;
+        float volume_{1.0};
     };
 
 }  // namespace myapp
