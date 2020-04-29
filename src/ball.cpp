@@ -5,6 +5,7 @@
 #include "mylibrary/ball.h"
 #include <cinder/app/App.h>
 #include <cinder/gl/gl.h>
+#include "mylibrary/location.h"
 
 using namespace ci;
 
@@ -16,5 +17,13 @@ namespace brickbreaker{
     void Ball::DrawBall() {
         gl::color(color_);
         gl::drawSolidCircle(vec2(location_.X(), location_.Y()), radius_);
+    }
+
+    void Ball::ReverseX() {
+        velocity_ = Location(-(velocity_.X()), velocity_.Y());
+    }
+
+    void Ball::ReverseY() {
+        velocity_ = Location(velocity_.X(), -(velocity_.Y()));
     }
 }

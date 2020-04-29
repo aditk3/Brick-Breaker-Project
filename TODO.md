@@ -11,7 +11,7 @@
 -[x] Move Ball
 -[x] Bounce Ball off edges
 -[x] Create a Brick
--[ ] Create row of Bricks
+-[x] Create row of Bricks
 -[ ] Brick breaking logic
 
 ##Gameplay

@@ -20,6 +20,8 @@ namespace brickbreaker {
             Ball();
             void DrawBall();
             void MoveBall();
+            void ReverseX();
+            void ReverseY();
             size_t GetRadius() { return radius_; }
             Location GetLocation() { return location_; }
             Location GetVelocity() { return velocity_; }

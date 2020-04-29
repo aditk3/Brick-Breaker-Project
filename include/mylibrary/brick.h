@@ -12,12 +12,15 @@ namespace brickbreaker {
 
     class Brick {
         public:
-            Brick(int width, Location location);
+            Brick(int width, int height, Location location);
             void DrawBrick();
+            Location GetLocation() { return location_; }
+            int Width() { return width_; }
+            int Height() { return height_; }
 
         private:
             Location location_;
-            int width_, height_{25};
+            int width_, height_;
     };
 }
 

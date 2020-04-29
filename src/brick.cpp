@@ -11,8 +11,9 @@ using namespace ci;
 using namespace ci::app;
 
 namespace brickbreaker {
-    Brick::Brick(int width, Location location) :
-    width_{width},
+    Brick::Brick(int width, int height, Location location) :
+    width_{width - 1},
+    height_{height - 1},
     location_(location.X(), location.Y()) {}
 
     void Brick::DrawBrick() {

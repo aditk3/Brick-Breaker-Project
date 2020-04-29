@@ -59,12 +59,14 @@ namespace myapp {
     void MyApp::setup() {
         SetUpMusic();
         SetUpGif();
+        engine_.CreateBricks();
     }
 
     void MyApp::update() {
         if (engine_.IsInGame()) {
             engine_.Bounces();
             engine_.MoveBall();
+            engine_.BrickCollisions();
         }
     }
 
@@ -75,9 +77,7 @@ namespace myapp {
             DrawStartGame();
         }
         DrawScoreBoard();
-        engine_.DrawBrick();
-        engine_.DrawPaddle();
-        engine_.DrawBall();
+        engine_.DrawEngineElements();
     }
 
     void MyApp::keyDown(KeyEvent event) {
