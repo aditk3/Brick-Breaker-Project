@@ -15,7 +15,7 @@
 using namespace ci::app;
 using namespace ci;
 
-const char kNormalFont[] = "Consolas";
+const char kNormalFont[] = "Arial";
 const char kBoldFont[] = "Arial Bold";
 const char kDifferentFont[] = "Papyrus";
 
@@ -169,17 +169,17 @@ static void DrawStartGame() {
 void MyApp::DrawScoreBoard() {
   if (!engine_.GameOver()) {
     const cinder::vec2 loc_score(900, 130);
-    const cinder::ivec2 size = {100, 50};
+    const cinder::ivec2 size = {100, 75};
     const Color color = Color::white();
     std::string to_print = "Score: " + std::to_string(engine_.Score());
-    PrintText(to_print, color, size, loc_score);
+    PrintText(to_print, color, size, loc_score, 22);
     const cinder::vec2 loc_lives(900, 600 - 130);
     to_print = "Lives: " + std::to_string(engine_.Lives());
-    PrintText(to_print, color, size, loc_lives);
+    PrintText(to_print, color, size, loc_lives, 22);
   }
   else {
     const cinder::vec2 loc_score(500, 200);
-    const cinder::ivec2 size = {300, 50};
+    const cinder::ivec2 size = {300, 75};
     const Color color = Color::white();
     std::string to_print = "Score: " + std::to_string(engine_.Score());
     PrintText(to_print, color, size, loc_score, 50);

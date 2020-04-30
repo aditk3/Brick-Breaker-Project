@@ -22,6 +22,7 @@ class Ball {
   void ReverseX();
   void ReverseY();
   size_t GetRadius() { return radius_; }
+  size_t GetSpeed() { return speed_; }
   Location GetLocation() { return location_; }
   Location GetVelocity() { return velocity_; }
   void ResetVelocity(int vel = -1);
@@ -29,7 +30,7 @@ class Ball {
   void SetLocation(Location location) { location_ = location; }
 
  private:
-  size_t radius_{10}, speed_{10};
+  size_t radius_{10}, speed_{5};
   Color color_ = Color::white();
   Location location_, velocity_;
 };

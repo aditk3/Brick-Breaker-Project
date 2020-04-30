@@ -55,8 +55,9 @@ void Engine::DrawEngineElements() {
 void Engine::CreateBricks() {
   brick_width_ = width_ / bricks_per_row_;
   for (size_t i{0}; i < bricks_per_row_; i++) {
+    // TODO: Randomize brick values and colors respectively
     bricks_.emplace_back(brick_width_, brick_height_,
-                         Location(i * brick_width_, 120));
+                         Location(i * brick_width_, 120), 2, Color(1, 1, 1));
   }
 }
 
@@ -64,15 +65,16 @@ void Engine::BrickCollisions() {
   if (bricks_.empty()) {
     return;
   }
-//  using namespace std;
-//  for (auto it = bricks_.begin(); it != bricks_.end();) {
-//    if (BoxBoundsAlgorithm(*it)) {
-//      bricks_.erase(it);
-//      ball_.ReverseY();
-//    } else {
-//      ++it;
-//    }
-//  }
+  using namespace std;
+  for (auto it = bricks_.begin(); it != bricks_.end();) {
+    if (BoxBoundsAlgorithm(*it)) {
+      score_ += it->Value();
+      bricks_.erase(it);
+      ball_.ReverseY();
+    } else {
+      ++it;
+    }
+  }
 }
 
 bool Engine::BoxBoundsAlgorithm(Brick &brick_location) {
@@ -87,7 +89,8 @@ bool Engine::BoxBoundsAlgorithm(Brick &brick_location) {
 }
 
 bool Engine::LifeOver() {
-  if (ball_.GetLocation().Y() + ball_.GetRadius() > paddle_.GetLocation().Y() + 10){
+  if (ball_.GetLocation().Y() + ball_.GetRadius() >
+      paddle_.GetLocation().Y() + 10) {
     lives_--;
     return true;
   }
