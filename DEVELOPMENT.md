@@ -42,7 +42,15 @@ case studies.
 - Set up paddle, ball, engine, and player classes.
 - As of now the paddle is controllable but there is no ball motion yet
 
-#### **04-28-20**
-- Almost done with complete game (basic brickbreaker)
-
 #### **04-29-20**
+- Added the ball
+- Single row of bricks is visible
+- [x] Add multiple rows
+- [x] Setup points system
+- [x] Implement lives and rounds into the engine
+- [x] Game Over screen
+
+#### **04-30-20**
+- Completed basic (not to code imo) brickbreaker game.
+- [ ] Need to add directional paddle rebounding
+- [ ] Need to fix bug in which ball ReflectsY coord when hitting a brick from the side (should ReflectX)
