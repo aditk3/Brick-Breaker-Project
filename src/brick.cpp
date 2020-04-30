@@ -20,7 +20,7 @@ Brick::Brick(int width, int height, Location location, int value, Color color)
       location_(location.X(), location.Y()) {}
 
 void Brick::DrawBrick() {
-  gl::color(Color(1, 1, 1));
+  gl::color(color_);
   gl::pushMatrices();
   gl::translate(location_.X(), location_.Y());
   gl::drawSolidRect(Rectf(0, 0, width_, height_));

@@ -54,7 +54,7 @@ void PrintText(const std::string &text, const C &color,
   cinder::gl::draw(texture, locp);
 }
 
-MyApp::MyApp() : player_("adit", 100) {}
+MyApp::MyApp() : player_("adit", 0) {}
 
 void MyApp::setup() {
   SetUpMusic();
@@ -67,6 +67,7 @@ void MyApp::update() {
   if (engine_.GameOver()) {
     sound_track_->stop();
     game_over_sound_->play();
+    player_.score_ = engine_.Score();
   }
   if (engine_.IsInGame()) {
     engine_.Bounces();
@@ -76,6 +77,11 @@ void MyApp::update() {
     if (engine_.LifeOver()) {
       engine_.SetGameState(false);
       engine_.Reset();
+    }
+
+    if (engine_.IsRoundOver()) {
+      engine_.SetGameState(false);
+      engine_.NextRound();
     }
   }
 }
@@ -90,6 +96,8 @@ void MyApp::draw() {
     }
     engine_.DrawEngineElements();
     DrawBackground();
+  } else {
+    DrawGif();
   }
 }
 
@@ -168,20 +176,22 @@ static void DrawStartGame() {
  */
 void MyApp::DrawScoreBoard() {
   if (!engine_.GameOver()) {
-    const cinder::vec2 loc_score(900, 130);
-    const cinder::ivec2 size = {100, 75};
+    const cinder::vec2 loc_score(900, 50);
+    const cinder::ivec2 size = {190, 35};
     const Color color = Color::white();
     std::string to_print = "Score: " + std::to_string(engine_.Score());
     PrintText(to_print, color, size, loc_score, 22);
-    const cinder::vec2 loc_lives(900, 600 - 130);
+    const cinder::vec2 loc_round(900, 400);
+    to_print = "Round: " + std::to_string(engine_.Round());
+    PrintText(to_print, color, size, loc_round, 22);
+    const cinder::vec2 loc_lives(900, 600 - 35);
     to_print = "Lives: " + std::to_string(engine_.Lives());
     PrintText(to_print, color, size, loc_lives, 22);
-  }
-  else {
-    const cinder::vec2 loc_score(500, 200);
+  } else {
+    const cinder::vec2 loc_score(500, 400);
     const cinder::ivec2 size = {300, 75};
     const Color color = Color::white();
-    std::string to_print = "Score: " + std::to_string(engine_.Score());
+    std::string to_print = "Score: " + std::to_string(player_.score_);
     PrintText(to_print, color, size, loc_score, 50);
   }
 }
@@ -211,11 +221,29 @@ void MyApp::SetUpBackground() {
 /**
  * Initializes GIF
  */
-void MyApp::SetUpGif() { gif_ = ciAnimatedGif::create(loadAsset("temp.gif")); }
+void MyApp::SetUpGif() {
+  gif_ = ciAnimatedGif::create(loadAsset("game_over.gif"));
+
+  bg_gif_ = ciAnimatedGif::create(loadAsset("game_over_bg.gif"));
+}
 
 void MyApp::DrawBackground() {
   gl::color(Color(1, 1, 1));
   gl::draw(main_background_texture_, Rectf(0, 0, 1000, 600));
+}
+
+void MyApp::DrawGif() {
+  gl::color(Color(1, 1, 1));
+  gl::pushMatrices();
+  gl::translate((1000 - 580) / 2, 100);
+  gl::scale(.50, .50);
+  gif_->draw();
+  gl::popMatrices();
+  gl::pushMatrices();
+  //  gl::translate((1000-900) / 2, 0);
+  gl::scale(2.2, 2.2);
+  bg_gif_->draw();
+  gl::popMatrices();
 }
 
 }  // namespace myapp

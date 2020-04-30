@@ -32,6 +32,8 @@ class MyApp : public cinder::app::App {
 
   void SetUpGif();
 
+  void DrawGif();
+
   void SetUpBackground();
 
   void DrawBackground();
@@ -40,7 +42,7 @@ class MyApp : public cinder::app::App {
   brickbreaker::Player player_;
   rph::SoundPlayerRef sound_track_, game_over_sound_;
   cinder::gl::Texture2dRef main_background_texture_;
-  ciAnimatedGifRef gif_;
+  ciAnimatedGifRef gif_, bg_gif_;
   float volume_{1.0};
 };
 

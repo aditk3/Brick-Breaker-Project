@@ -1,9 +1,12 @@
 // Copyright (c) 2020 [Your Name]. All rights reserved.
 
+#include <cinder/gl/gl.h>
 #include <mylibrary/brick.h>
 #include <mylibrary/engine.h>
 #include <mylibrary/location.h>
 
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 namespace brickbreaker {
@@ -53,11 +56,22 @@ void Engine::DrawEngineElements() {
 }
 
 void Engine::CreateBricks() {
+  ci::Color colors[3]{
+      Color(0, 255, 255),
+      Color(255, 128, 0),
+      Color(255, 0, 255),
+  };
+
+  std::srand(std::time(NULL));
   brick_width_ = width_ / bricks_per_row_;
-  for (size_t i{0}; i < bricks_per_row_; i++) {
-    // TODO: Randomize brick values and colors respectively
-    bricks_.emplace_back(brick_width_, brick_height_,
-                         Location(i * brick_width_, 120), 2, Color(1, 1, 1));
+  for (size_t i{0}; i < rows_; i++) {
+    for (size_t j{0}; j < bricks_per_row_; j++) {
+      int value = rand() % 3;
+      bricks_.emplace_back(
+          brick_width_, brick_height_,
+          Location(j * brick_width_, 50 + (25 + brick_height_) * i), value + 1,
+          colors[value]);
+    }
   }
 }
 
@@ -71,6 +85,7 @@ void Engine::BrickCollisions() {
       score_ += it->Value();
       bricks_.erase(it);
       ball_.ReverseY();
+      //      ball_.ReverseX();
     } else {
       ++it;
     }
@@ -105,10 +120,27 @@ bool Engine::GameOver() {
 
   return false;
 }
+
 void Engine::Reset() {
   ball_.SetLocation(Location(400, 555));
-  ball_.ResetVelocity();
+  ball_.ResetVelocity(ball_speed_);
 }
+
+// void Engine::Reset(int vel) {
+//  ball_.SetLocation(Location(400, 555));
+//  ball_.ResetVelocity(vel);
+//}
+
+void Engine::NextRound() {
+  ball_speed_++;
+  Reset();
+  rows_++;
+  bricks_per_row_ += 2;
+  round_++;
+  CreateBricks();
+}
+
+bool Engine::IsRoundOver() { return (bricks_.empty()); }
 
 // Member initializer lists
 
