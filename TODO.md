@@ -12,6 +12,9 @@
 -[x] Bounce Ball off edges
 -[x] Create a Brick
 -[x] Create row of Bricks
--[ ] Brick breaking logic
+-[x] Brick breaking logic
+-[ ] Score increment
+-[ ] Directional deflections
+-[ ] Lives system
 
 ##Gameplay

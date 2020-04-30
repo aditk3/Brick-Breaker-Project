@@ -13,31 +13,31 @@
 
 namespace myapp {
 
-    class MyApp : public cinder::app::App {
-    public:
-        MyApp();
+class MyApp : public cinder::app::App {
+ public:
+  MyApp();
 
-        void setup() override;
+  void setup() override;
 
-        void update() override;
+  void update() override;
 
-        void draw() override;
+  void draw() override;
 
-        void keyDown(cinder::app::KeyEvent) override;
+  void keyDown(cinder::app::KeyEvent) override;
 
-    private:
-        void SetUpMusic();
+ private:
+  void SetUpMusic();
 
-        void DrawScoreBoard();
+  void DrawScoreBoard();
 
-        void SetUpGif();
+  void SetUpGif();
 
-        brickbreaker::Engine engine_;
-        brickbreaker::Player player_;
-        rph::SoundPlayerRef sound_track_;
-        ciAnimatedGifRef gif_;
-        float volume_{1.0};
-    };
+  brickbreaker::Engine engine_;
+  brickbreaker::Player player_;
+  rph::SoundPlayerRef sound_track_;
+  ciAnimatedGifRef gif_;
+  float volume_{1.0};
+};
 
 }  // namespace myapp
 

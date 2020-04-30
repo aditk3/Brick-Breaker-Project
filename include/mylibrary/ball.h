@@ -7,7 +7,6 @@
 
 #include <cinder/app/App.h>
 #include <cinder/gl/gl.h>
-
 #include <mylibrary/location.h>
 
 using namespace ci;
@@ -15,24 +14,24 @@ using namespace ci::app;
 
 namespace brickbreaker {
 
-    class Ball {
-        public:
-            Ball();
-            void DrawBall();
-            void MoveBall();
-            void ReverseX();
-            void ReverseY();
-            size_t GetRadius() { return radius_; }
-            Location GetLocation() { return location_; }
-            Location GetVelocity() { return velocity_; }
-            void SetVelocity(Location velocity) { velocity_ = velocity ;}
-            void SetLocation(Location location) { location_ = location ;}
+class Ball {
+ public:
+  Ball();
+  void DrawBall();
+  void MoveBall();
+  void ReverseX();
+  void ReverseY();
+  size_t GetRadius() { return radius_; }
+  Location GetLocation() { return location_; }
+  Location GetVelocity() { return velocity_; }
+  void SetVelocity(Location velocity) { velocity_ = velocity; }
+  void SetLocation(Location location) { location_ = location; }
 
-        private:
-            size_t radius_{10}, speed_{5};
-            Color color_ = Color::white();
-            Location location_, velocity_;
-        };
-}
+ private:
+  size_t radius_{10}, speed_{5};
+  Color color_ = Color::white();
+  Location location_, velocity_;
+};
+}  // namespace brickbreaker
 
-#endif //FINALPROJECT_BALL_H
+#endif  // FINALPROJECT_BALL_H
