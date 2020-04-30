@@ -24,11 +24,12 @@ class Ball {
   size_t GetRadius() { return radius_; }
   Location GetLocation() { return location_; }
   Location GetVelocity() { return velocity_; }
+  void ResetVelocity(int vel = -1);
   void SetVelocity(Location velocity) { velocity_ = velocity; }
   void SetLocation(Location location) { location_ = location; }
 
  private:
-  size_t radius_{10}, speed_{5};
+  size_t radius_{10}, speed_{10};
   Color color_ = Color::white();
   Location location_, velocity_;
 };

@@ -19,6 +19,9 @@ class Engine {
   void MoveBall() { ball_.MoveBall(); }
   void SetGameState(bool state) { has_started_ = state; }
   bool IsInGame() { return has_started_; }
+  bool LifeOver();
+  bool GameOver();
+  void Reset();
   void CreateBricks();
   void BrickCollisions();
   bool BoxBoundsAlgorithm(Brick &brick_location);
@@ -31,7 +34,7 @@ class Engine {
 
  private:
   bool has_started_{false};
-  Paddle paddle_;  // "static class variables in c++"
+  Paddle paddle_;
   Ball ball_;
   std::vector<Brick> bricks_{};
   int brick_width_, brick_height_{25};

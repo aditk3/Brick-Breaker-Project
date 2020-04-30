@@ -15,7 +15,7 @@
 using namespace ci::app;
 using namespace ci;
 
-const char kNormalFont[] = "Arial";
+const char kNormalFont[] = "Consolas";
 const char kBoldFont[] = "Arial Bold";
 const char kDifferentFont[] = "Papyrus";
 
@@ -35,15 +35,16 @@ static void DrawStartGame();
  */
 template <typename C>
 void PrintText(const std::string &text, const C &color,
-               const cinder::ivec2 &size, const cinder::vec2 &loc) {
+               const cinder::ivec2 &size, const cinder::vec2 &loc,
+               const int font_size = 30) {
   cinder::gl::color(color);
 
   auto box = TextBox()
                  .alignment(TextBox::CENTER)
-                 .font(cinder::Font(kNormalFont, 30))
+                 .font(cinder::Font(kNormalFont, font_size))
                  .size(size)
                  .color(color)
-                 .backgroundColor(ColorA(0, 0, 0, 0))
+                 .backgroundColor(ColorA(0, 0, 0, 1))
                  .text(text);
 
   const auto box_size = box.getSize();
@@ -58,31 +59,46 @@ MyApp::MyApp() : player_("adit", 100) {}
 void MyApp::setup() {
   SetUpMusic();
   SetUpGif();
+  SetUpBackground();
   engine_.CreateBricks();
 }
 
 void MyApp::update() {
+  if (engine_.GameOver()) {
+    sound_track_->stop();
+    game_over_sound_->play();
+  }
   if (engine_.IsInGame()) {
     engine_.Bounces();
     engine_.MoveBall();
     engine_.BrickCollisions();
+
+    if (engine_.LifeOver()) {
+      engine_.SetGameState(false);
+      engine_.Reset();
+    }
   }
 }
 
 void MyApp::draw() {
   gl::clear(Color::black());
-  DrawBorder();
-  if (!engine_.IsInGame()) {
-    DrawStartGame();
-  }
   DrawScoreBoard();
-  engine_.DrawEngineElements();
+  if (!engine_.GameOver()) {
+    DrawBorder();
+    if (!engine_.IsInGame()) {
+      DrawStartGame();
+    }
+    engine_.DrawEngineElements();
+    DrawBackground();
+  }
 }
 
 void MyApp::keyDown(KeyEvent event) {
   switch (event.getCode()) {
     case KeyEvent::KEY_RETURN: {
-      engine_.SetGameState(true);
+      if (!engine_.IsInGame() && !engine_.GameOver()) {
+        engine_.SetGameState(true);
+      }
       break;
     }
       //            case KeyEvent::KEY_UP:
@@ -151,15 +167,23 @@ static void DrawStartGame() {
  * Prints out the current score and number of lives left
  */
 void MyApp::DrawScoreBoard() {
-  const cinder::vec2 loc_score(900, 130);
-  const cinder::ivec2 size = {200, 50};
-  const Color color = Color::white();
-  std::string to_print = "Score: " + std::to_string(engine_.Score());
-  PrintText(to_print, color, size, loc_score);
-
-  const cinder::vec2 loc_lives(900, 600 - 130);
-  to_print = "Lives Left: " + std::to_string(engine_.Lives());
-  PrintText(to_print, color, size, loc_lives);
+  if (!engine_.GameOver()) {
+    const cinder::vec2 loc_score(900, 130);
+    const cinder::ivec2 size = {100, 50};
+    const Color color = Color::white();
+    std::string to_print = "Score: " + std::to_string(engine_.Score());
+    PrintText(to_print, color, size, loc_score);
+    const cinder::vec2 loc_lives(900, 600 - 130);
+    to_print = "Lives: " + std::to_string(engine_.Lives());
+    PrintText(to_print, color, size, loc_lives);
+  }
+  else {
+    const cinder::vec2 loc_score(500, 200);
+    const cinder::ivec2 size = {300, 50};
+    const Color color = Color::white();
+    std::string to_print = "Score: " + std::to_string(engine_.Score());
+    PrintText(to_print, color, size, loc_score, 50);
+  }
 }
 
 /**
@@ -170,11 +194,28 @@ void MyApp::SetUpMusic() {
   sound_track_->setLoop(true);
   sound_track_->setVolume(volume_);
   sound_track_->start();
+
+  game_over_sound_ = rph::SoundPlayer::create(loadAsset("loser.mp3"));
+  game_over_sound_->setVolume(1.0f);
+}
+
+/**
+ * Creates textures for the background
+ */
+void MyApp::SetUpBackground() {
+  ci::gl::enableDepthRead();
+  auto img = loadImage(loadAsset("main_bg.png"));
+  main_background_texture_ = gl::Texture2d::create(img);
 }
 
 /**
  * Initializes GIF
  */
 void MyApp::SetUpGif() { gif_ = ciAnimatedGif::create(loadAsset("temp.gif")); }
+
+void MyApp::DrawBackground() {
+  gl::color(Color(1, 1, 1));
+  gl::draw(main_background_texture_, Rectf(0, 0, 1000, 600));
+}
 
 }  // namespace myapp

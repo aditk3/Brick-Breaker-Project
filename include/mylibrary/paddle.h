@@ -17,8 +17,6 @@ namespace brickbreaker {
 class Paddle {
   size_t speed_{15};
   int width_{100}, height_{15};
-  //        Color color_ = Color::white();
-  Color color_ = Color(128, 0, 128);
   cinder::gl::Texture2dRef paddle_texture_;
   Location location_;
 

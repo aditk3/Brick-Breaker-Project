@@ -64,13 +64,15 @@ void Engine::BrickCollisions() {
   if (bricks_.empty()) {
     return;
   }
-  using namespace std;
-  for (auto it = bricks_.begin(); it != bricks_.end(); ++it) {
-    if (BoxBoundsAlgorithm(*it)) {
-      bricks_.erase(it);
-      ball_.ReverseY();
-    }
-  }
+//  using namespace std;
+//  for (auto it = bricks_.begin(); it != bricks_.end();) {
+//    if (BoxBoundsAlgorithm(*it)) {
+//      bricks_.erase(it);
+//      ball_.ReverseY();
+//    } else {
+//      ++it;
+//    }
+//  }
 }
 
 bool Engine::BoxBoundsAlgorithm(Brick &brick_location) {
@@ -82,6 +84,27 @@ bool Engine::BoxBoundsAlgorithm(Brick &brick_location) {
              brick_location.GetLocation().X() &&
          ball_.GetLocation().X() - ball_.GetRadius() <=
              brick_location.GetLocation().X() + brick_width_;
+}
+
+bool Engine::LifeOver() {
+  if (ball_.GetLocation().Y() + ball_.GetRadius() > paddle_.GetLocation().Y() + 10){
+    lives_--;
+    return true;
+  }
+
+  return false;
+}
+
+bool Engine::GameOver() {
+  if (lives_ == 0) {
+    return true;
+  }
+
+  return false;
+}
+void Engine::Reset() {
+  ball_.SetLocation(Location(400, 555));
+  ball_.ResetVelocity();
 }
 
 // Member initializer lists
