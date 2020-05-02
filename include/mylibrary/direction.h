@@ -6,7 +6,10 @@
 #define FINALPROJECT_DIRECTION_H
 
 namespace brickbreaker{
-    enum class Direction { kUp, kDown, kLeft, kRight };
+    /**
+     * Enum Class used to determine the direction the Paddle should move in
+     */
+    enum class Direction { kLeft, kRight };
 }
 
 #endif //FINALPROJECT_DIRECTION_H

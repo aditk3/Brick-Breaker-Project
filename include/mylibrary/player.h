@@ -10,7 +10,9 @@
 namespace brickbreaker {
 struct Player {
   Player(const std::string& name, size_t score) : name_(name), score_(score) {}
+
   std::string name_;
+
   size_t score_;
 };
 }  // namespace brickbreaker

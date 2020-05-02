@@ -26,23 +26,46 @@ class MyApp : public cinder::app::App {
   void keyDown(cinder::app::KeyEvent) override;
 
  private:
+  /**
+   * Starts background music (looped)
+   */
   void SetUpMusic();
 
+  /**
+   * Prints out the current score and number of lives left
+   */
   void DrawScoreBoard();
 
+  /**
+   * Initializes GIF
+   */
   void SetUpGif();
 
+  /**
+   * Draws the gifs
+   */
   void DrawGif();
 
+  /**
+   * Creates textures for the background
+   */
   void SetUpBackground();
 
+  /**
+   * Draws the background
+   */
   void DrawBackground();
 
   brickbreaker::Engine engine_;
+
   brickbreaker::Player player_;
+
   rph::SoundPlayerRef sound_track_, game_over_sound_;
+
   cinder::gl::Texture2dRef main_background_texture_;
+
   ciAnimatedGifRef gif_, bg_gif_;
+
   float volume_{1.0};
 };
 

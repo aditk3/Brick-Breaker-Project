@@ -23,7 +23,14 @@ namespace myapp {
 
 using cinder::app::KeyEvent;
 
+/**
+ * Draws a vertical line to separate the scoreboard and play area
+ */
 static void DrawBorder();
+
+/**
+ * Draws instructions to start the game
+ */
 static void DrawStartGame();
 
 /**
@@ -109,21 +116,13 @@ void MyApp::keyDown(KeyEvent event) {
       }
       break;
     }
-      //            case KeyEvent::KEY_UP:
-      //            case KeyEvent::KEY_w: {
-      //                engine_.SetDirection(Direction::kLeft);
-      //                break;
-      //            }
-      //            case KeyEvent::KEY_DOWN:
-      //            case KeyEvent::KEY_s: {
-      //                engine_.SetDirection(Direction::kRight);
-      //                break;
-      //            }
+
     case KeyEvent::KEY_LEFT:
     case KeyEvent::KEY_a: {
       engine_.MovePaddle(brickbreaker::Direction::kLeft);
       break;
     }
+
     case KeyEvent::KEY_RIGHT:
     case KeyEvent::KEY_d: {
       engine_.MovePaddle(brickbreaker::Direction::kRight);
@@ -138,31 +137,14 @@ void MyApp::keyDown(KeyEvent event) {
       }
       sound_track_->setVolume(volume_);
     }
-    case KeyEvent::KEY_p: {
-      //                paused_ = !paused_;
-      //
-      //                if (paused_) {
-      //                    last_pause_time_ = system_clock::now();
-      //                } else {
-      //                    last_intact_time_ += system_clock::now() -
-      //                    last_pause_time_;
-      //                }
-      break;
-    }
   }
 }
 
-/**
- * Draws game right-edge border
- */
 static void DrawBorder() {
   gl::color(Color::white());
   gl::drawSolidRect(Rectf(800, 0, 802, 600));
 }
 
-/**
- * Draws start game
- */
 static void DrawStartGame() {
   const cinder::vec2 loc_score(400, 225);
   const cinder::ivec2 size = {500, 50};
@@ -171,9 +153,6 @@ static void DrawStartGame() {
   PrintText(to_print, color, size, loc_score);
 }
 
-/**
- * Prints out the current score and number of lives left
- */
 void MyApp::DrawScoreBoard() {
   if (!engine_.GameOver()) {
     const cinder::vec2 loc_score(900, 50);
@@ -196,9 +175,6 @@ void MyApp::DrawScoreBoard() {
   }
 }
 
-/**
- * Starts background music (looped)
- */
 void MyApp::SetUpMusic() {
   sound_track_ = rph::SoundPlayer::create(loadAsset("temp.mp3"));
   sound_track_->setLoop(true);
@@ -209,18 +185,12 @@ void MyApp::SetUpMusic() {
   game_over_sound_->setVolume(1.0f);
 }
 
-/**
- * Creates textures for the background
- */
 void MyApp::SetUpBackground() {
   ci::gl::enableDepthRead();
   auto img = loadImage(loadAsset("main_bg.png"));
   main_background_texture_ = gl::Texture2d::create(img);
 }
 
-/**
- * Initializes GIF
- */
 void MyApp::SetUpGif() {
   gif_ = ciAnimatedGif::create(loadAsset("game_over.gif"));
 
@@ -240,7 +210,6 @@ void MyApp::DrawGif() {
   gif_->draw();
   gl::popMatrices();
   gl::pushMatrices();
-  //  gl::translate((1000-900) / 2, 0);
   gl::scale(2.2, 2.2);
   bg_gif_->draw();
   gl::popMatrices();

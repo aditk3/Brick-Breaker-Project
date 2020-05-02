@@ -119,15 +119,15 @@ void Engine::BrickCollisions() {
   }
 }
 
-bool Engine::BoxBoundsAlgorithm(Brick &brick_location) {
+bool Engine::BoxBoundsAlgorithm(Brick &brick) {
   return ball_.GetLocation().Y() - ball_.GetRadius() <=
-             brick_location.GetLocation().Y() + brick_height_ &&
+             brick.GetLocation().Y() + brick_height_ &&
          ball_.GetLocation().Y() + ball_.GetRadius() >=
-             brick_location.GetLocation().Y() &&
+             brick.GetLocation().Y() &&
          ball_.GetLocation().X() + ball_.GetRadius() >=
-             brick_location.GetLocation().X() &&
+             brick.GetLocation().X() &&
          ball_.GetLocation().X() - ball_.GetRadius() <=
-             brick_location.GetLocation().X() + brick_width_;
+             brick.GetLocation().X() + brick_width_;
 }
 
 bool Engine::LifeOver() {
