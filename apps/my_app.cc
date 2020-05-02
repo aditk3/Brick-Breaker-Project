@@ -155,14 +155,19 @@ static void DrawStartGame() {
 
 void MyApp::DrawScoreBoard() {
   if (!engine_.GameOver()) {
+    // Prints score
     const cinder::vec2 loc_score(900, 50);
     const cinder::ivec2 size = {190, 35};
     const Color color = Color::white();
     std::string to_print = "Score: " + std::to_string(engine_.Score());
     PrintText(to_print, color, size, loc_score, 22);
+
+    //Prints round
     const cinder::vec2 loc_round(900, 400);
     to_print = "Round: " + std::to_string(engine_.Round());
     PrintText(to_print, color, size, loc_round, 22);
+
+    //Prints lives
     const cinder::vec2 loc_lives(900, 600 - 35);
     to_print = "Lives: " + std::to_string(engine_.Lives());
     PrintText(to_print, color, size, loc_lives, 22);

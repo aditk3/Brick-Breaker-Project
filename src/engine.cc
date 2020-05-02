@@ -38,30 +38,16 @@ void Engine::PaddleHitCheck() {
           Location(ball_.GetLocation().X(),
                    paddle_.GetLocation().Y() - ball_.GetRadius()));
       // Used to determine the zone in which the ball landed
-      int zone, num_zones{6}, ball_x{ball_.GetLocation().X()},
+      int zone{6}, num_zones{6}, ball_x{ball_.GetLocation().X()},
           paddle_width{paddle_.Width()}, paddle_x{paddle_.GetLocation().X()},
           zone_width;
       zone_width = paddle_width / num_zones;
 
-      if (ball_x < paddle_x + zone_width) {
-        zone = 1;
-      } else {
-        if (ball_x < paddle_x + (zone_width * 2)) {
-          zone = 2;
+      for (int i {num_zones - 1}; i > 0; i --) {
+        if (ball_x < paddle_x + (zone_width * i)) {
+          zone = i;
         } else {
-          if (ball_x < paddle_x + (zone_width * 3)) {
-            zone = 3;
-          } else {
-            if (ball_x < paddle_x + (zone_width * 4)) {
-              zone = 4;
-            } else {
-              if (ball_x < paddle_x + (zone_width * 5)) {
-                zone = 5;
-              } else {
-                zone = 6;
-              }
-            }
-          }
+          break;
         }
       }
 

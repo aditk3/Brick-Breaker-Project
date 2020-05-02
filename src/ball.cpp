@@ -35,7 +35,7 @@ void Ball::ResetVelocity(int vel) {
 void Ball::ZoneBasedRebounding(int zone) {
   switch (zone) {
     case 1: {
-      velocity_ = Location(-speed_, -(speed_ - 3));
+      velocity_ = Location(-(speed_ + 1), -(speed_ - 3));
       break;
     }
     case 2: {
@@ -55,7 +55,7 @@ void Ball::ZoneBasedRebounding(int zone) {
       break;
     }
     case 6: {
-      velocity_ = Location(speed_, -(speed_ - 3));
+      velocity_ = Location((speed_ + 1), -(speed_ - 3));
       break;
     }
     default: {

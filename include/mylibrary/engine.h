@@ -6,7 +6,6 @@
 #include <mylibrary/brick.h>
 #include <mylibrary/direction.h>
 #include <mylibrary/paddle.h>
-#include <mylibrary/player.h>
 
 #include <vector>
 
@@ -89,26 +88,9 @@ class Engine {
   void BrickCollisions();
 
   /**
-   * Returns whether the ball_ has entered the periphery of a Brick
-   * @param brick Brick&
-   * @return bool
-   */
-  bool BoxBoundsAlgorithm(Brick &brick);
-
-  /**
-   * Makes sure the ball_ is restricted to the dimensions of the window
-   */
-  void EdgeChecks();
-
-  /**
    * Calls the functions responsible for making the ball_ bounce
    */
   void Bounces();
-
-  /**
-   * Checks whether the ball_ has hit the paddle_
-   */
-  void PaddleHitCheck();
 
   /**
    * Returns the paddle_'s location_
@@ -135,6 +117,23 @@ class Engine {
   size_t Lives() { return lives_; }
 
  private:
+  /**
+   * Returns whether the ball_ has entered the periphery of a Brick
+   * @param brick Brick&
+   * @return bool
+   */
+  bool BoxBoundsAlgorithm(Brick &brick);
+
+  /**
+   * Makes sure the ball_ is restricted to the dimensions of the window
+   */
+  void EdgeChecks();
+
+  /**
+   * Checks whether the ball_ has hit the paddle_
+   */
+  void PaddleHitCheck();
+
   bool has_started_{false};
 
   Paddle paddle_;

@@ -6,7 +6,7 @@ Author: Adit Kapoor
 ## Intro
 For my project I want to make [Brick Breaker](https://en.wikipedia.org/wiki/Brick_Breaker) game.
 
-My final goal is to be able to play a full game along with power-ups and a leader-board.
+My final goal is to be able to play a full game along with a leader-board.
 
 The reason I chose the game 'Brick Breaker' is because it was one of my favorite games growing up, and I wanted to try
 and create the game based on the current coding skills that I have.
@@ -26,7 +26,7 @@ and make sure they work.
 By week 2, I would want to make a bare-bones working version of the full game (only the game aspect). If I have time, I
 will add all the textures to my game this week, otherwise I'll do that during the start of *Week 3*.
 
-During the 3rd and final week, I want to implement the leader-board and the power-ups (extensions) so that my game
+During the 3rd and final week, I want to implement the leader-board (extension) so that my game
 is fully functional and ready for presenting.
 
 ---
