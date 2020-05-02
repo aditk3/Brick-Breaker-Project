@@ -16,11 +16,15 @@ using namespace ci::app;
 namespace brickbreaker {
 class Paddle {
   size_t speed_{15};
+
   int width_{100}, height_{15};
+
   cinder::gl::Texture2dRef paddle_texture_;
+
   Location location_;
 
  public:
+
   Paddle();
 
   int Width() { return width_; }
@@ -30,6 +34,10 @@ class Paddle {
   void DrawPaddle();
 
   Location GetLocation() { return location_; }
+
+  size_t GetSpeed() { return speed_; }
+
+  void SetSpeed(size_t speed) { speed_ = speed; }
 };
 }  // namespace brickbreaker
 

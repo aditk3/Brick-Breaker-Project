@@ -16,23 +16,41 @@ namespace brickbreaker {
 
 class Ball {
  public:
+
   Ball();
+
   void DrawBall();
+
   void MoveBall();
+
   void ReverseX();
+
   void ReverseY();
+
   size_t GetRadius() { return radius_; }
+
   int GetSpeed() { return speed_; }
+
   Location GetLocation() { return location_; }
+
   Location GetVelocity() { return velocity_; }
+
   void ResetVelocity(int vel = -1);
+
+  void ZoneBasedRebounding(int zone);
+
   void SetVelocity(Location velocity) { velocity_ = velocity; }
+
   void SetLocation(Location location) { location_ = location; }
 
  private:
+
   size_t radius_{10};
-  int speed_{4};
+
+  int speed_{5};
+
   Color color_ = Color::white();
+
   Location location_, velocity_;
 };
 }  // namespace brickbreaker

@@ -37,7 +37,35 @@ void Engine::PaddleHitCheck() {
       ball_.SetLocation(
           Location(ball_.GetLocation().X(),
                    paddle_.GetLocation().Y() - ball_.GetRadius()));
-      ball_.ReverseY();
+      // Used to determine the zone in which the ball landed
+      int zone, num_zones{6}, ball_x{ball_.GetLocation().X()},
+          paddle_width{paddle_.Width()}, paddle_x{paddle_.GetLocation().X()},
+          zone_width;
+      zone_width = paddle_width / num_zones;
+
+      if (ball_x < paddle_x + zone_width) {
+        zone = 1;
+      } else {
+        if (ball_x < paddle_x + (zone_width * 2)) {
+          zone = 2;
+        } else {
+          if (ball_x < paddle_x + (zone_width * 3)) {
+            zone = 3;
+          } else {
+            if (ball_x < paddle_x + (zone_width * 4)) {
+              zone = 4;
+            } else {
+              if (ball_x < paddle_x + (zone_width * 5)) {
+                zone = 5;
+              } else {
+                zone = 6;
+              }
+            }
+          }
+        }
+      }
+
+      ball_.ZoneBasedRebounding(zone);
     }
   }
 }
@@ -85,7 +113,6 @@ void Engine::BrickCollisions() {
       score_ += it->Value();
       bricks_.erase(it);
       ball_.ReverseY();
-      //      ball_.ReverseX();
     } else {
       ++it;
     }
@@ -113,26 +140,16 @@ bool Engine::LifeOver() {
   return false;
 }
 
-bool Engine::GameOver() {
-  if (lives_ == 0) {
-    return true;
-  }
-
-  return false;
-}
+bool Engine::GameOver() { return lives_ == 0; }
 
 void Engine::Reset() {
   ball_.SetLocation(Location(400, 555));
   ball_.ResetVelocity(ball_speed_);
 }
 
-// void Engine::Reset(int vel) {
-//  ball_.SetLocation(Location(400, 555));
-//  ball_.ResetVelocity(vel);
-//}
-
 void Engine::NextRound() {
-  ball_speed_++;
+  //  ball_speed_++;
+  paddle_.SetSpeed(paddle_.GetSpeed() - 1);
   Reset();
   rows_++;
   bricks_per_row_ += 2;
@@ -141,7 +158,5 @@ void Engine::NextRound() {
 }
 
 bool Engine::IsRoundOver() { return (bricks_.empty()); }
-
-// Member initializer lists
 
 }  // namespace brickbreaker

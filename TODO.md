@@ -15,7 +15,6 @@
 -[x] Brick breaking logic (NEED TO FIX)
 -[x] Score increment
 -[x] Lives system
--
 
 ##Gameplay
--[ ] Directional deflections
+-[x] Directional deflections

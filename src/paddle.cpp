@@ -29,13 +29,15 @@ void Paddle::DrawPaddle() {
 void Paddle::MovePaddle(Direction dir) {
   switch (dir) {
     case Direction::kRight: {
-      if (this->location_.X() + width_ <= 800)
+      if (this->location_.X() + width_ <= 800) {
         this->location_ = location_ + Location(speed_, 0);
+      }
       break;
     }
     case Direction::kLeft: {
-      if (this->location_.X() >= 0)
+      if (this->location_.X() >= 0) {
         this->location_ = location_ + Location(-1 * speed_, 0);
+      }
       break;
     }
     default:

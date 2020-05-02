@@ -31,4 +31,36 @@ void Ball::ResetVelocity(int vel) {
   else
     velocity_ = Location(vel, -(vel - 2));
 }
+
+void Ball::ZoneBasedRebounding(int zone) {
+  switch (zone) {
+    case 1: {
+      velocity_ = Location(-speed_, -(speed_ - 3));
+      break;
+    }
+    case 2: {
+      velocity_ = Location(-speed_, -(speed_ - 2));
+      break;
+    }
+    case 3: {
+      velocity_ = Location(-speed_, -(speed_ - 1));
+      break;
+    }
+    case 4: {
+      velocity_ = Location(speed_, -(speed_ - 1));
+      break;
+    }
+    case 5: {
+      velocity_ = Location(speed_, -(speed_ - 2));
+      break;
+    }
+    case 6: {
+      velocity_ = Location(speed_, -(speed_ - 3));
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+}
 }  // namespace brickbreaker
