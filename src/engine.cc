@@ -1,4 +1,4 @@
-// Copyright (c) 2020 [Your Name]. All rights reserved.
+// Copyright (c) 2020 Adit Kapoor. All rights reserved.
 
 #include <cinder/gl/gl.h>
 #include <mylibrary/brick.h>

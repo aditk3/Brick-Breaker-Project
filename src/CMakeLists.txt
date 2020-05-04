@@ -16,10 +16,10 @@ file(GLOB SOURCE_LIST CONFIGURE_DEPENDS
 
 ci_make_library(
         LIBRARY_NAME mylibrary
-        CINDER_PATH  ${CINDER_PATH}
-        SOURCES      ${SOURCE_LIST}
-        INCLUDES     "${FinalProject_SOURCE_DIR}/include"
-        LIBRARIES
+        CINDER_PATH ${CINDER_PATH}
+        SOURCES ${SOURCE_LIST}
+        INCLUDES "${FinalProject_SOURCE_DIR}/include"
+        LIBRARIES sqlite-modern-cpp sqlite3
         BLOCKS
 )
 

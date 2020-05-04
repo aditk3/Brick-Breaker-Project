@@ -3,7 +3,13 @@
 #define CATCH_CONFIG_MAIN
 
 #include <cinder/Rand.h>
+#include <mylibrary/ball.h>
+#include <mylibrary/brick.h>
+#include <mylibrary/direction.h>
 #include <mylibrary/engine.h>
+#include <mylibrary/location.h>
+#include <mylibrary/paddle.h>
+#include <mylibrary/player.h>
 
 #include <catch2/catch.hpp>
 

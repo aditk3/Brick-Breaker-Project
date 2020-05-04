@@ -1,4 +1,4 @@
-// Copyright (c) 2020 [Your Name]. All rights reserved.
+// Copyright (c) 2020 Adit Kapoor. All rights reserved.
 #ifndef FINALPROJECT_MYLIBRARY_EXAMPLE_H_
 #define FINALPROJECT_MYLIBRARY_EXAMPLE_H_
 
@@ -144,7 +144,7 @@ class Engine {
 
   int brick_width_, brick_height_{25}, ball_speed_{4};
 
-  size_t width_{800}, height_{600}, score_{}, lives_{10}, bricks_per_row_{6},
+  size_t width_{800}, height_{600}, score_{}, lives_{1}, bricks_per_row_{6},
       rows_{2}, round_{1};
 };
 }  // namespace brickbreaker

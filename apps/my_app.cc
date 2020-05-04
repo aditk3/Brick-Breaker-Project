@@ -1,25 +1,29 @@
-// Copyright (c) 2020 [Your Name]. All rights reserved.
+// Copyright (c) 2020 Adit Kapoor. All rights reserved.
 
 #include "my_app.h"
 
 #include <cinder/app/App.h>
 #include <cinder/gl/gl.h>
+#include <gflags/gflags.h>
 #include <mylibrary/direction.h>
-#include <mylibrary/location.h>
 
 #include <iostream>
 #include <string>
 
 #include "SoundPlayer.h"
 
+namespace myapp {
+
 using namespace ci::app;
 using namespace ci;
+
+DECLARE_string(name);
 
 const char kNormalFont[] = "Arial";
 const char kBoldFont[] = "Arial Bold";
 const char kDifferentFont[] = "Papyrus";
-
-namespace myapp {
+const char kDbPath[] = "leaderboard.sqlite";
+const size_t kScoresToShow{6};
 
 using cinder::app::KeyEvent;
 
@@ -61,7 +65,9 @@ void PrintText(const std::string &text, const C &color,
   cinder::gl::draw(texture, locp);
 }
 
-MyApp::MyApp() : player_("adit", 0) {}
+MyApp::MyApp()
+    : player_name_(FLAGS_name),
+      leaderboard_{cinder::app::getAssetPath(kDbPath).string()} {}
 
 void MyApp::setup() {
   SetUpMusic();
@@ -74,7 +80,7 @@ void MyApp::update() {
   if (engine_.GameOver()) {
     sound_track_->stop();
     game_over_sound_->play();
-    player_.score_ = engine_.Score();
+    AddScoreToLeaderboard();
   }
   if (engine_.IsInGame()) {
     engine_.Bounces();
@@ -162,21 +168,21 @@ void MyApp::DrawScoreBoard() {
     std::string to_print = "Score: " + std::to_string(engine_.Score());
     PrintText(to_print, color, size, loc_score, 22);
 
-    //Prints round
+    // Prints round
     const cinder::vec2 loc_round(900, 400);
     to_print = "Round: " + std::to_string(engine_.Round());
     PrintText(to_print, color, size, loc_round, 22);
 
-    //Prints lives
+    // Prints lives
     const cinder::vec2 loc_lives(900, 600 - 35);
     to_print = "Lives: " + std::to_string(engine_.Lives());
     PrintText(to_print, color, size, loc_lives, 22);
   } else {
-    const cinder::vec2 loc_score(500, 400);
-    const cinder::ivec2 size = {300, 75};
-    const Color color = Color::white();
-    std::string to_print = "Score: " + std::to_string(player_.score_);
-    PrintText(to_print, color, size, loc_score, 50);
+    std::string header = "All-Time High Scores:";
+    DrawLeaderBoard(200, 250, top_players_, header);
+
+    header = "Player's Top Scores:";
+    DrawLeaderBoard(1000 - 200, 250, top_player_scores_, header);
   }
 }
 
@@ -218,6 +224,35 @@ void MyApp::DrawGif() {
   gl::scale(2.2, 2.2);
   bg_gif_->draw();
   gl::popMatrices();
+}
+
+void MyApp::AddScoreToLeaderboard() {
+  if (top_players_.empty()) {
+    leaderboard_.AddScoreToLeaderBoard({player_name_, engine_.Score()});
+    top_players_ = leaderboard_.RetrieveHighScores(kScoresToShow);
+    top_player_scores_ = leaderboard_.RetrieveHighScores(
+        {player_name_, engine_.Score()}, kScoresToShow);
+    // It is crucial the this vector be populated, given that `kLimit` > 0.
+    assert(!top_players_.empty());
+  }
+  return;
+}
+
+void MyApp::DrawLeaderBoard(int x_loc, int y_loc,
+                            const std::vector<brickbreaker::Player> &to_print,
+                            const std::string &header) {
+  const cinder::ivec2 size = {300, 75};
+  const Color color = Color::white();
+  const cinder::vec2 hi_score_loc(x_loc, y_loc);
+  const cinder::ivec2 lb_size = {300, 50};
+  size_t row = 0;
+  PrintText(header, color, ivec2(300, 35), hi_score_loc);
+  for (const brickbreaker::Player &player : to_print) {
+    std::stringstream ss;
+    ss << player.name << " - " << player.score;
+    PrintText(ss.str(), color, lb_size,
+              {hi_score_loc.x, hi_score_loc.y + (++row) * 50}, 22);
+  }
 }
 
 }  // namespace myapp

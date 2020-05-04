@@ -54,10 +54,19 @@ case studies.
 ---
 ##Week 3
 #### **04-30-20**
-- Completed basic (not to code imo) brickbreaker game (previous Week's checklist)
+- Completed basic (not to code imo) brick-breaker game (previous Week's checklist)
 - [x] Need to add directional paddle rebounding
 - [ ] Need to fix bug in which ball ReflectsY coord when hitting a brick from the side (should ReflectX)
 
 #### **05-01-20**
 - Added directional paddle rebounding
 - Updated proposal as adding power-ups seems too far-fetched as of now (will add a leader-board instead)
+
+#### **05-04-20**
+- Imported SQL libraries to work on the leader-board
+- **BUG**: leaderboard.* files were unable to access the sql headers for some reason
+- [x] Need to check how to reimport headers properly
+
+#### **05-01-20**
+- Fixed improper import (Had to add library to src's cmake file)
+- Added an All-Time leader-board as well as an Individual leader-board

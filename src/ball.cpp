@@ -26,10 +26,11 @@ void Ball::ReverseX() { velocity_ = Location(-(velocity_.X()), velocity_.Y()); }
 void Ball::ReverseY() { velocity_ = Location(velocity_.X(), -(velocity_.Y())); }
 
 void Ball::ResetVelocity(int vel) {
-  if (vel == -1)
+  if (vel == -1) {
     velocity_ = Location(speed_, -(speed_ - 2));
-  else
+  } else {
     velocity_ = Location(vel, -(vel - 2));
+  }
 }
 
 void Ball::ZoneBasedRebounding(int zone) {
