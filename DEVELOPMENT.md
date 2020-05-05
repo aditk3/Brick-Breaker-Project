@@ -56,7 +56,7 @@ case studies.
 #### **04-30-20**
 - Completed basic (not to code imo) brick-breaker game (previous Week's checklist)
 - [x] Need to add directional paddle rebounding
-- [ ] Need to fix bug in which ball ReflectsY coord when hitting a brick from the side (should ReflectX)
+- [x] Need to fix bug in which ball ReflectsY coord when hitting a brick from the side (should ReflectX)
 
 #### **05-01-20**
 - Added directional paddle rebounding
@@ -70,3 +70,6 @@ case studies.
 #### **05-01-20**
 - Fixed improper import (Had to add library to src's cmake file)
 - Added an All-Time leader-board as well as an Individual leader-board
+
+#### **06-01-20**
+- Fixed bug so that ball now reflects across the correct axis

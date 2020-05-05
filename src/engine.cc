@@ -43,7 +43,7 @@ void Engine::PaddleHitCheck() {
           zone_width;
       zone_width = paddle_width / num_zones;
 
-      for (int i {num_zones - 1}; i > 0; i --) {
+      for (int i{num_zones - 1}; i > 0; i--) {
         if (ball_x < paddle_x + (zone_width * i)) {
           zone = i;
         } else {
@@ -97,8 +97,15 @@ void Engine::BrickCollisions() {
   for (auto it = bricks_.begin(); it != bricks_.end();) {
     if (BoxBoundsAlgorithm(*it)) {
       score_ += it->Value();
+      // Checks whether the ball hit the horizontal or vertical edges of the
+      // brick and reflects the ball across the respective axis
+      if (ball_.GetLocation().X() < (it->GetLocation().X()) ||
+          ball_.GetLocation().X() > (it->GetLocation().X() + it->Width())) {
+        ball_.ReverseX();
+      } else {
+        ball_.ReverseY();
+      }
       bricks_.erase(it);
-      ball_.ReverseY();
     } else {
       ++it;
     }
