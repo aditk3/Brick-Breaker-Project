@@ -180,7 +180,7 @@ class Engine {
 
   int brick_width_, brick_height_{25}, ball_speed_{4};
 
-  size_t width_{800}, height_{600}, score_{}, lives_{1}, bricks_per_row_{6},
+  size_t width_{800}, height_{600}, score_{}, lives_{3}, bricks_per_row_{6},
       rows_of_bricks_{2}, round_{1};
 };
 }  // namespace brickbreaker
