@@ -18,6 +18,8 @@ class LeaderBoard {
   // Creates a new leaderboard table if it doesn't already exist.
   explicit LeaderBoard(const std::string& db_path);
 
+  void ClearTable();
+
   // Adds a player to the leaderboard.
   void AddScoreToLeaderBoard(const Player&);
 

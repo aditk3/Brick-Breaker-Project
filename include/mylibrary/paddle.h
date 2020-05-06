@@ -25,7 +25,7 @@ class Paddle {
    * Returns the width_ of the Paddle
    * @return int
    */
-  int Width() { return width_; }
+  int GetWidth() { return width_; }
 
   /**
    * Used to move the Paddle

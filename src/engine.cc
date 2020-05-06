@@ -30,7 +30,7 @@ void Engine::PaddleHitCheck() {
   if ((ball_.GetLocation().X() + ball_.GetRadius() >=
        paddle_.GetLocation().X()) &&
       (ball_.GetLocation().X() - ball_.GetRadius() <=
-       paddle_.GetLocation().X() + paddle_.Width())) {
+       paddle_.GetLocation().X() + paddle_.GetWidth())) {
     // Checks if the ball is in line with the paddle (vertically)
     if (ball_.GetLocation().Y() + ball_.GetRadius() >
         paddle_.GetLocation().Y()) {
@@ -39,7 +39,7 @@ void Engine::PaddleHitCheck() {
                    paddle_.GetLocation().Y() - ball_.GetRadius()));
       // Used to determine the zone in which the ball landed
       int zone{6}, num_zones{6}, ball_x{ball_.GetLocation().X()},
-          paddle_width{paddle_.Width()}, paddle_x{paddle_.GetLocation().X()},
+          paddle_width{paddle_.GetWidth()}, paddle_x{paddle_.GetLocation().X()},
           zone_width;
       zone_width = paddle_width / num_zones;
 
@@ -70,6 +70,7 @@ void Engine::DrawEngineElements() {
 }
 
 void Engine::CreateBricks() {
+  bricks_.clear();
   ci::Color colors[3]{
       Color(0, 255, 255),
       Color(255, 128, 0),
@@ -78,7 +79,7 @@ void Engine::CreateBricks() {
 
   std::srand(std::time(NULL));
   brick_width_ = width_ / bricks_per_row_;
-  for (size_t i{0}; i < rows_; i++) {
+  for (size_t i{0}; i < rows_of_bricks_; i++) {
     for (size_t j{0}; j < bricks_per_row_; j++) {
       int value = rand() % 3;
       bricks_.emplace_back(
@@ -99,12 +100,13 @@ void Engine::BrickCollisions() {
       score_ += it->Value();
       // Checks whether the ball hit the horizontal or vertical edges of the
       // brick and reflects the ball across the respective axis
-      if (ball_.GetLocation().X() < (it->GetLocation().X()) ||
+      if (ball_.GetLocation().X() < it->GetLocation().X() ||
           ball_.GetLocation().X() > (it->GetLocation().X() + it->Width())) {
         ball_.ReverseX();
       } else {
         ball_.ReverseY();
       }
+
       bricks_.erase(it);
     } else {
       ++it;
@@ -144,7 +146,7 @@ void Engine::NextRound() {
   //  ball_speed_++;
   paddle_.SetSpeed(paddle_.GetSpeed() - 1);
   Reset();
-  rows_++;
+  rows_of_bricks_++;
   bricks_per_row_ += 2;
   round_++;
   CreateBricks();

@@ -71,7 +71,7 @@ class Engine {
   /**
    * Sets up for the next round by:
    *    Making the paddle_ slower
-   *    Adding more rows_ of Bricks
+   *    Adding more rows_of_bricks_ of Bricks
    *    Adding more bricks_per_row_
    *    Creating a new set of Bricks
    */
@@ -116,6 +116,42 @@ class Engine {
    */
   size_t Lives() { return lives_; }
 
+  /**
+   * Returns the paddle_'s width_
+   * @return int
+   */
+  int GetPaddleWidth() { return paddle_.GetWidth(); }
+
+  /**
+   * Returns the paddle_'s width_
+   * @return int
+   */
+  size_t GetPaddleSpeed() { return paddle_.GetSpeed(); }
+
+  /**
+   * Sets the Paddle's speed_
+   * @param speed size_t
+   */
+  void SetPaddleSpeed(size_t speed) { paddle_.SetSpeed(speed); }
+
+  /**
+   * Returns the bricks_ vector
+   * @return std::vector<Brick>
+   */
+  std::vector<Brick> GetBricks() { return bricks_; }
+
+  /**
+   * Returns rows_of_bricks_
+   * @return size_t
+   */
+  size_t GetRowsOfBricks() { return rows_of_bricks_; }
+
+  /**
+   * Returns bricks_per_row_
+   * @return size_t
+   */
+  size_t GetBricksPerRow() { return bricks_per_row_; }
+
  private:
   /**
    * Returns whether the ball_ has entered the periphery of a Brick
@@ -145,7 +181,7 @@ class Engine {
   int brick_width_, brick_height_{25}, ball_speed_{4};
 
   size_t width_{800}, height_{600}, score_{}, lives_{1}, bricks_per_row_{6},
-      rows_{2}, round_{1};
+      rows_of_bricks_{2}, round_{1};
 };
 }  // namespace brickbreaker
 

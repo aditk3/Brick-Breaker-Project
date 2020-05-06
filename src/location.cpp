@@ -39,23 +39,28 @@ namespace brickbreaker{
     }
 
     Location Location::operator-(const Location& rhs) const {
-        return *this + (-rhs);
+      return *this + (-rhs);
     }
 
     Location Location::operator-() const { return {-x_, -y_}; }
 
     Location& Location::operator+=(const Location& rhs) {
-        *this = *this + rhs;
-        return *this;
+      *this = *this + rhs;
+      return *this;
+    }
+
+    Location& Location::operator-=(const Location& rhs) {
+      *this = *this - rhs;
+      return *this;
     }
 
     int mod(int a, int b) {
-        int c = a % b;
-        return c + (c < 0 ? b : 0);
+      int c = a % b;
+      return c + (c < 0 ? b : 0);
     }
 
     Location Location::operator%(const Location& rhs) const {
-        return {mod(x_, rhs.x_), mod(y_, rhs.y_)};
+      return {mod(x_, rhs.x_), mod(y_, rhs.y_)};
     }
 
     int Location::X() { return x_; }

@@ -29,6 +29,7 @@ namespace brickbreaker {
         Location operator%(const Location& rhs) const;
         Location operator-(const Location& rhs) const;
         Location& operator+=(const Location& rhs);
+        Location& operator-=(const Location& rhs);
         Location operator-() const;
 
         // Accessors.

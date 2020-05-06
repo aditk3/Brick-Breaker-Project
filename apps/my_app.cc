@@ -221,7 +221,7 @@ void MyApp::DrawGif() {
   gif_->draw();
   gl::popMatrices();
   gl::pushMatrices();
-  gl::scale(2.2, 2.2);
+  gl::scale(1.6, 1.7);
   bg_gif_->draw();
   gl::popMatrices();
 }
