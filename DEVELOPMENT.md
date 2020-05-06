@@ -73,3 +73,5 @@ case studies.
 
 #### **06-01-20**
 - Fixed bug so that ball now reflects across the correct axis
+- Added README.md
+- Added some tests

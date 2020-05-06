@@ -1,33 +1,40 @@
 # Brick Breaker
 
-Author: Adit Kapoor
+####Author: Adit Kapoor
 
 ---
-## Intro
-For my project I want to make [Brick Breaker](https://en.wikipedia.org/wiki/Brick_Breaker) game.
+#### Description
+I have made a [Brick Breaker](https://en.wikipedia.org/wiki/Brick_Breaker) game - one of the all time Atari classics.
+As you clear all the bricks on a particular round, the game becomes slightly harder to challenge you gamers.
 
-My final goal is to be able to play a full game along with a leader-board.
-
-The reason I chose the game 'Brick Breaker' is because it was one of my favorite games growing up, and I wanted to try
-and create the game based on the current coding skills that I have.
-
-### External Libraries
-I will be using [CinderBlocks](https://libcinder.org/docs/guides/cinder-blocks/index.html) as well as an
-[SQL](https://en.wikipedia.org/wiki/SQL) library to make the leader-board.
-- The CinderBlocks I will be using are [ciAnimatedGif](https://github.com/cwhitney/ciAnimatedGif) and
-[Cinder-SoundPlayer](https://github.com/redpaperheart/Cinder-SoundPlayer).
-- I will be using [SqliteModernCpp](https://github.com/SqliteModernCpp/sqlite_modern_cpp) to communicate with the
-database
+Read [this document](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html) to understand the project
+layout.
 ---
+####Dependancies Used:
+- [CMake](https://cmake.org/)
+- [MSVC 2015](https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o%7Emsft%7Evscom%7Eolder-downloads)
+ *(for MSW based systems)*
 
-As of week 1, I would like to set up the library and figure out the CMake files. I want to be able to use the libraries 
-and make sure they work. 
-
-By week 2, I would want to make a bare-bones working version of the full game (only the game aspect). If I have time, I
-will add all the textures to my game this week, otherwise I'll do that during the start of *Week 3*.
-
-During the 3rd and final week, I want to implement the leader-board (extension) so that my game
-is fully functional and ready for presenting.
-
+####Libraries Used:
+- [Cinder](https://libcinder.org/)
+- [ciAnimatedGif](https://github.com/cwhitney/ciAnimatedGif) (CinderBlock)
+- [Cinder-SoundPlayer](https://github.com/redpaperheart/Cinder-SoundPlayer) (CinderBlock)
+- [SqliteModernCpp](https://github.com/SqliteModernCpp/sqlite_modern_cpp)
+- [Gflags](https://github.com/gflags/gflags)
 ---
-
+####How to Build the Project:
+1. [Download](https://libcinder.org/download) and install Cinder *(you can find a tutorial
+[here](https://courses.grainger.illinois.edu/cs126/sp2020/assignments/snake/))*
+2. Add all required code to the CMake files for both the
+[SqliteModernCpp](https://github.com/SqliteModernCpp/sqlite_modern_cpp) library as well as the
+[Gflags](https://github.com/gflags/gflags) library
+3. Download the CinderBlocks, place them into your *~/Cinder/Blocks* folder and follow the cinderblock.xml file found
+in the downloaded code to set up the blocks for your own use
+---
+####Controls:
+Key  | Action
+------------- | -------------
+Left Arrow / A Key | Move the paddle left
+Right Arrow / D Key | Move the paddle right
+M Key | Mute/unmute the background music
+Return Key | Start the game
