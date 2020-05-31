@@ -9,7 +9,7 @@ As you clear all the bricks on a particular round, the game becomes slightly har
 
 Read [this document](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html) to understand the project
 layout.
----
+
 ###Dependancies Used:
 - [CMake](https://cmake.org/)
 - [MSVC 2015](https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o%7Emsft%7Evscom%7Eolder-downloads)
