@@ -1,6 +1,6 @@
 # Brick Breaker
 
-##### Author: Adit Kapoor
+### Author: Adit Kapoor
 
 ---
 
