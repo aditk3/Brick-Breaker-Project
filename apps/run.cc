@@ -15,7 +15,7 @@ using std::string;
 using std::vector;
 
 namespace myapp {
-DEFINE_string(name, "Guest", "the name of the player");
+DEFINE_string(name, "Adit", "the name of the player");
 
 // Code taken from CS126 Snake Repo
 void ParseArgs(vector<string>* args) {

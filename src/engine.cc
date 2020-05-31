@@ -26,7 +26,7 @@ void Engine::EdgeChecks() {
 }
 
 void Engine::PaddleHitCheck() {
-  // CChecks if the ball is in line with the paddle (horizontally)
+  // Checks if the ball is in line with the paddle (horizontally)
   if ((ball_.GetLocation().X() + ball_.GetRadius() >=
        paddle_.GetLocation().X()) &&
       (ball_.GetLocation().X() - ball_.GetRadius() <=

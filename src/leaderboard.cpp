@@ -63,4 +63,5 @@ vector<Player> LeaderBoard::RetrieveHighScores(const Player& player,
 }
 
 void LeaderBoard::ClearTable() { db_ << "DELETE from leaderboard"; }
+
 }  // namespace brickbreaker

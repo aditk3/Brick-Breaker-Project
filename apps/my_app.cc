@@ -116,6 +116,13 @@ void MyApp::draw() {
 
 void MyApp::keyDown(KeyEvent event) {
   switch (event.getCode()) {
+      // Uncomment code to be able to clear the leaderboard with the 'X' key
+
+      //    case KeyEvent::KEY_x: {
+      //      leaderboard_.ClearTable();
+      //      break;
+      //    }
+
     case KeyEvent::KEY_RETURN: {
       if (!engine_.IsInGame() && !engine_.GameOver()) {
         engine_.SetGameState(true);
