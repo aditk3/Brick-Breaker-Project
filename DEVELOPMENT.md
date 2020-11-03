@@ -1,9 +1,9 @@
 # Development
 
 ---
-##Week 1
+## Week 1
 
-####**04-18-20**
+#### **04-18-20**
 - Cloned final project and CinderBlock
 - [x] Need to add block to project
 
@@ -27,7 +27,7 @@ case studies.
 - Need to speak to CA to figure out if it's allowed (GONNA MISS THE DEADLINE THIS WEEK THOUGH)
 
 ---
-##Week 2
+## Week 2
 
 #### **04-22-20**
 - Tried getting into the Queue for over 13 hours, but was not able to speak to a CA.
@@ -52,7 +52,7 @@ case studies.
 - [x] Game Over screen
 
 ---
-##Week 3
+## Week 3
 #### **04-30-20**
 - Completed basic (not to code imo) brick-breaker game (previous Week's checklist)
 - [x] Need to add directional paddle rebounding
