@@ -1,6 +1,6 @@
 # To-Do
 
-##Setup
+## Setup
 -[x] Player Class
 -[x] Display Score 
 -[x] Paddle Class 
@@ -16,5 +16,5 @@
 -[x] Score increment
 -[x] Lives system
 
-##Gameplay
+## Gameplay
 -[x] Directional deflections
